@@ -7,6 +7,7 @@ class StateMachine:
         self.result = ""
         self.table = []
         self.number_string = ""
+        self.enable = True
 
 # Step through the input
     def step(self, inp:str):
@@ -17,7 +18,10 @@ class StateMachine:
         else:
             self.result = ""
         if s == 6:
-            self.table.append(self.result)
+            if self.enable:
+                self.table.append(self.result)
+            else:
+                self.result = ""
             s = 0
             self.result = ""
 
@@ -48,7 +52,7 @@ class StateMachine:
 # Determine the TRUE or FALSE state
 class TextSeq(StateMachine):
     startState = 0
-    def getNextValues(self, state, inp:str, feature_flag:bool=False):
+    def getNextValues(self, state, inp:str):
         if state == 0 and inp == 'm':
             return (1, True)
         elif state == 1 and inp == 'u':
@@ -65,7 +69,26 @@ class TextSeq(StateMachine):
             return (5, True)
         elif state == 5 and inp == ')':
             return (6, True)
+        elif state == 0 and inp == 'd':
+            return (10, False)
+        elif state == 10 and inp == 'o':
+            return (11, False)
+        elif state == 11 and inp == '(':
+            return (12, False)
+        elif state == 12 and inp == ')':
+            self.enable = True
+            return (0, False)
+        elif state == 11 and inp == 'n':
+            return (21, False)
+        elif state == 21 and inp == "'":
+            return (22, False)
+        elif state == 22 and inp == 't':
+            return (23, False)
+        elif state == 23 and inp == '(':
+            return (24, False)
+        elif state == 24 and inp == ')':
+            self.enable = False
+            return (0, False)
         
         else:
             return (0, False)
-
