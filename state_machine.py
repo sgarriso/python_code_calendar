@@ -48,7 +48,7 @@ class StateMachine:
 # Determine the TRUE or FALSE state
 class TextSeq(StateMachine):
     startState = 0
-    def getNextValues(self, state, inp:str, feature_flag:bool):
+    def getNextValues(self, state, inp:str, feature_flag:bool=False):
         if state == 0 and inp == 'm':
             return (1, True)
         elif state == 1 and inp == 'u':
