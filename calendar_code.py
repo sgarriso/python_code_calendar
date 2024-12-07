@@ -1,6 +1,7 @@
 from share_libs import get_calendar_data, format_text
 from Environment import Environment
 from state_machine import TextSeq
+from word_search import WordSearch
 def day_1():
     results = get_calendar_data(Environment())
 
@@ -94,8 +95,15 @@ def day3():
             total = total + (result[0] * result[1])
         return total
     print(solve1(data))
+def day4():
+    data = get_calendar_data(Environment(),4)
+    mat = []
+    for line in data.splitlines():
+        mat.append(list(line))
+    ws = WordSearch(mat, 'XMAS')
+    print(ws.find_words())
 
-day3()
+day4()
         
         
     
