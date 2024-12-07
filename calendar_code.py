@@ -1,5 +1,6 @@
 from share_libs import get_calendar_data, format_text
 from Environment import Environment
+from state_machine import TextSeq
 def day_1():
     results = get_calendar_data(Environment())
 
@@ -81,7 +82,22 @@ def day_2():
         return sum(results)
     print(solve_1(list_numbers))
     print(solve_1(list_numbers, True))
-day_2()
+
+def day3():
+    data = get_calendar_data(Environment(),3)
+    def solve1(data):
+        InSeq = TextSeq()
+        result = InSeq.feeder(list(data))
+        total = 0
+        for string in result:
+            result = InSeq.feeder_2(list(string))
+            total = total + (result[0] * result[1])
+        return total
+    print(solve1(data))
+
+day3()
+        
+        
     
     
     
