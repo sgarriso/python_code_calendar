@@ -1,3 +1,4 @@
+from player import Player
 from share_libs import get_calendar_data, format_text
 from Environment import Environment
 from state_machine import TextSeq
@@ -103,7 +104,16 @@ def day4():
     ws = WordSearch(mat, 'XMAS')
     print(ws.find_words())
 
-day4()
+def day6():
+    data = get_calendar_data(Environment(), 6)
+    dataset = []
+    for i in data.splitlines():
+        dataset.append(list(i))
+    player = Player(dataset)
+    player.moving(dataset)
+    print(len(player.path.keys()))
+
+day6()
         
         
     
