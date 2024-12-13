@@ -1,3 +1,4 @@
+from PasswordPolicy import PasswordPolicy
 from player import Player
 from share_libs import get_calendar_data, format_text
 from Environment import Environment
@@ -113,7 +114,20 @@ def day6():
     player.moving(dataset)
     print(len(player.path.keys()))
 
-day6()
+#day6()
+def day2_2020():
+    data = get_calendar_data(Environment(),2, 2020)
+    counter = 0
+    for text in data.splitlines():
+        pair, symbol, password = text.split()
+        password =  PasswordPolicy(pair, symbol, password)
+        print(password)
+        if password.is_valid_other():
+            
+            counter = counter + 1
+    print(counter)
+day2_2020()
+    
         
         
     
